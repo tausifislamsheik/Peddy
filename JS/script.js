@@ -51,17 +51,58 @@ const categoryContainer = (categories) =>{
         const categoryBtn = document.createElement('div');
         categoryBtn.innerHTML = `
             
-            <button class='btn px-12 py-8'>
+            <button class='btn px-16 my-8 py-8 font-bold text-lg rounded-full'>
+            
                 ${category.category}
             </button>
         `
         categorySection.append(categoryBtn)
     });
+};
+
+
+// Display card
+
+const loadCard = async () =>{
+    const res = await fetch('https://openapi.programming-hero.com/api/peddy/pets');
+    const data = await res.json();
+    displayCard(data.pets)
+}
+
+const displayCard = (pets) =>{
+    const cardContainer = document.querySelector('#card-container');
+    pets.forEach(pet =>{
+        const card = document.createElement('div');
+        card.innerHTML = `
+           <div class="card">
+                <figure class='h-[200px]'>
+                    <img class='w-full h-full'
+                    src=${pet.image}
+                    alt="" />
+                </figure>
+                <div class="card-body px-0 py-4 ">
+                    <h2 class="card-title font-bold text-2xl">${pet.pet_name}</h2>
+                    <div class='font-semibold text-gray-600 text-sm border-b'>
+                        <p>Breed: ${pet.breed}</p>
+                        <p>Birth: ${pet.date_of_birth}</p>
+                        <p>Gender: ${pet.gender}</p>
+                        <p>Price: ${pet.price}<span></span>$</p>
+                    </div>
+                    
+                    </div>
+                    <div class='text-center'>
+                      <button class='btn rounded-xl mr-4 btn-outline border-teal-700 text-teal-700'><img class='w-7' src="https://img.icons8.com/sf-regular/48/facebook-like.png" alt="facebook-like"/></button>
+                      <button class='btn rounded-xl mr-4 btn-outline hover:bg-teal-900 hover:text-white border-teal-700 text-teal-700'>Adopt</button>
+                      <button class='btn rounded-xl btn-outline hover:bg-teal-900 hover:text-white border-teal-700 text-teal-700'>Details</button>
+                    </div>
+           </div>
+        `;
+        cardContainer.appendChild(card)
+    })
 }
 
 
-
-
+loadCard();
 loadCategory();
 posterContainer();
 navbarContainer();
