@@ -37,6 +37,54 @@ const posterContainer = () =>{
     posterSection.appendChild(poster);
 };
 
+// Footer section
+
+const footerContainer = () =>{
+    const footerSection = document.querySelector("#footer");
+    const footer = document.createElement('div');
+    footer.innerHTML = `
+            <footer class="footer sm:footer-horizontal bg-black text-white p-10">
+                    <nav>
+                        <div class="navbar-start gap-2 mb-4">
+                            <img class='w-6' src='images/logo.webp' />
+                            <p class='text-3xl font-bold'>Peddy</p>
+                        </div>
+                        <a class="link link-hover">Location: av. Washington 165, NY CA 54003</a>
+                        <a class="link link-hover">Phone: +31 85 964 47 25</a>
+                        <a class="link link-hover">Email: info@yourdomain.com</a>
+                        <a class="link link-hover">Openings hours: 9.00 AM - 5.00 PM</a>
+                    </nav>
+                    <nav>
+                        <h6 class="footer-title">Company</h6>
+                        <a class="link link-hover">About us</a>
+                        <a class="link link-hover">Contact</a>
+                        <a class="link link-hover">Shop</a>
+                        <a class="link link-hover">Pet</a>
+                    </nav>
+                    <nav>
+                        <h6 class="footer-title">Legal</h6>
+                        <a class="link link-hover">Terms of use</a>
+                        <a class="link link-hover">Privacy policy</a>
+                        <a class="link link-hover">Cookie policy</a>
+                    </nav>
+                    <form>
+                        <h6 class="footer-title">Newsletter</h6>
+                        <fieldset class="w-80">
+                        <label>Enter your email address</label>
+                        <div class="join mt-4">
+                            <input
+                            type="text"
+                            placeholder="username@site.com"
+                            class="input input-bordered join-item text-black" />
+                            <button class="btn bg-teal-700 text-white join-item">Subscribe</button>
+                        </div>
+                        </fieldset>
+                    </form>
+            </footer>
+    `
+    footerSection.appendChild(footer)
+}
+
 // Category section
 
 const loadCategory = async () =>{
@@ -91,7 +139,7 @@ const displayCard = (pets) =>{
                     
                     </div>
                     <div class='text-center'>
-                      <button class='btn rounded-xl mr-4 btn-outline border-teal-700 text-teal-700'><img class='w-7' src="https://img.icons8.com/sf-regular/48/facebook-like.png" alt="facebook-like"/></button>
+                      <button class='btn rounded-xl mr-4 btn-outline border-teal-700 text-teal-700 hover:bg-teal-900'><img class='w-7' src="https://img.icons8.com/sf-regular/48/737373/facebook-like.png" alt="like"/></button>
                       <button class='btn rounded-xl mr-4 btn-outline hover:bg-teal-900 hover:text-white border-teal-700 text-teal-700'>Adopt</button>
                       <button class='btn rounded-xl btn-outline hover:bg-teal-900 hover:text-white border-teal-700 text-teal-700'>Details</button>
                     </div>
@@ -104,5 +152,6 @@ const displayCard = (pets) =>{
 
 loadCard();
 loadCategory();
+footerContainer();
 posterContainer();
 navbarContainer();
