@@ -22,4 +22,20 @@ const navbarContainer = () =>{
 };
 
 
+// Poster section
+
+const posterContainer = () =>{
+    const posterSection = document.querySelector('#poster-section');
+    const poster = document.createElement('div');
+    poster.innerHTML =`
+         <p class='text-2xl font-bold text-gray-500 mb-5'>Bringing Families Together ❤️‍🔥 </p>
+         <p class='text-5xl font-bold mb-5'>Your Path to Adoption <br> Starts Here</p>
+         <p class='text-gray-500 mb-5'>It is a long established fact that a reader will be distracted by the readable content of a page <br> when looking at its layout. The point of using Lorem Ipsum is that it has a.</p>
+         <button class="btn btn-outline hover:bg-teal-900 hover:text-white border-teal-700 text-teal-700">View More</button>
+         <img class='w-[600px] mx-auto' src='images/pet.webp' />
+    `;
+    posterSection.appendChild(poster);
+};
+
+posterContainer();
 navbarContainer();
