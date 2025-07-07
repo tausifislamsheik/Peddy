@@ -88,96 +88,6 @@ const footerContainer = () =>{
     footerSection.appendChild(footer)
 }
 
-// // Category section
-
-// const loadCategory = async () =>{
-//     const res = await fetch('https://openapi.programming-hero.com/api/peddy/categories');
-//     const data = await res.json();
-//     categoryContainer(data.categories)
-// }
-
-// const categoryContainer = (categories) =>{
-//     const categorySection = document.getElementById('category-section');
-//     categories.forEach(category => {
-//         const categoryBtn = document.createElement('div');
-//         categoryBtn.innerHTML = `
-            
-//             <button id="btn-${category.category}" onclick="loadCard(${category.category})" class='category-button btn gap-2 px-16 my-8 py-8 font-bold text-lg rounded-full'>
-//                 <img class='w-10' src='${category.category_icon}' />
-//                 ${category.category}
-//             </button>
-//         `
-//         categorySection.append(categoryBtn)
-//     });
-// };
-
-
-
-// // Display card
-
-// const loadCard = async (categoryName) =>{
-//     const res = await fetch(`https://openapi.programming-hero.com/api/peddy/category/${categoryName}`);
-//     const data = await res.json();
-
-//     document.querySelectorAll('.category-button').forEach(btn => {
-//       btn.classList.remove('bg-[#0E7A811A]');
-//     });
-
-//     // Add 'active' to the clicked one
-//     const activeBtn = document.getElementById(`btn-${categoryName}`);
-//     if (activeBtn) {
-//       activeBtn.classList.add('bg-[#0E7A811A]', 'btn-outline', 'border-teal-700');
-//     }
-
-//     displayCard(data.pets)
-// }
-
-// const displayCard = (pets) =>{
-//     const cardContainer = document.querySelector('#card-container');
-//     cardContainer.innerHTML = '';
-//     pets.forEach(pet =>{
-//         const card = document.createElement('div');
-//         card.innerHTML = `
-//            <div class="card">
-//                 <figure class='h-[200px]'>
-//                     <img class='w-full h-full'
-//                     src=${pet.image}
-//                     alt="" />
-//                 </figure>
-//                 <div class="card-body px-0 py-4 ">
-//                     <h2 class="card-title font-bold text-2xl">${pet.pet_name}</h2>
-//                     <div class='font-semibold text-gray-600 text-sm border-b'>
-//                         <p>Breed: ${pet.breed}</p>
-//                         <p>Birth: ${pet.date_of_birth}</p>
-//                         <p>Gender: ${pet.gender}</p>
-//                         <p>Price: ${pet.price}<span></span>$</p>
-//                     </div>
-                    
-//                     </div>
-//                     <div class='text-center'>
-//                       <button class='btn rounded-xl mr-4 btn-outline border-teal-700 text-teal-700 hover:bg-teal-900'><img class='w-7' src="https://img.icons8.com/sf-regular/48/737373/facebook-like.png" alt="like"/></button>
-//                       <button class='btn rounded-xl mr-4 btn-outline hover:bg-teal-900 hover:text-white border-teal-700 text-teal-700'>Adopt</button>
-//                       <button class='btn rounded-xl btn-outline hover:bg-teal-900 hover:text-white border-teal-700 text-teal-700'>Details</button>
-//                     </div>
-//            </div>
-//         `;
-//         cardContainer.appendChild(card)
-//     })
-// }
-
-
-// loadCard();
-// loadCategory();
-
-
-
-
-
-
-
-
-
-
 
 // ✅ Load all pets on initial load
 const loadAllPets = async () => {
@@ -200,7 +110,7 @@ const categoryContainer = (categories) => {
     const categoryBtn = document.createElement('div');
     categoryBtn.innerHTML = `
       <button id="btn-${category.category}" onclick="loadCard('${category.category}')" 
-        class='category-button btn gap-2 px-6 lg:px-16 my-8 py-10 font-bold text-sm lg:text-lg rounded-full'>
+        class='category-button btn gap-2 px-6 lg:px-16 my-8 py-10 font-bold text-sm lg:text-lg rounded-2xl'>
         <img class='w-8 lg:w-10' src='${category.category_icon}' />
         ${category.category}
       </button>`;
@@ -216,12 +126,10 @@ const loadCard = async (categoryName) => {
   displayCard(data.data)
 
   // Highlight active category
-  document.querySelectorAll('.category-button').forEach(btn => btn.classList.remove('bg-[#0E7A811A]', 'btn-outline', 'border-teal-700'));
+  document.querySelectorAll('.category-button').forEach(btn => btn.classList.remove('bg-[#0E7A811A]', 'btn-outline', 'border-teal-700', 'rounded-full'));
   const activeBtn = document.getElementById(`btn-${categoryName}`);
-  if (activeBtn) activeBtn.classList.add('bg-[#0E7A811A]', 'btn-outline', 'border-teal-700');
+  if (activeBtn) activeBtn.classList.add('bg-[#0E7A811A]', 'btn-outline', 'border-teal-700', 'rounded-full');
 
-  // Display filtered pets
-  displayCard(data.pets || []);
 };
 
 // ✅ Display all pets (cards)
@@ -242,18 +150,19 @@ const displayCard = (pets) => {
   pets.forEach(pet => {
     const card = document.createElement('div');
     card.innerHTML = `
-      <div class="card">
+      <div class="card border border-gray-300 p-4">
         <figure class='h-[200px]'>
           <img class='w-full h-full object-cover' src='${pet.image || "images/placeholder.png"}' alt="" />
         </figure>
         <div class="card-body px-0 py-4">
           <h2 class="card-title font-bold text-2xl">${pet.pet_name || "Unnamed Pet"}</h2>
-          <div class='font-semibold text-gray-600 text-sm border-b'>
+          <div class='font-semibold text-gray-600 text-sm'>
             <p>Breed: ${pet.breed || "Unknown"}</p>
             <p>Birth: ${pet.date_of_birth || "Unknown"}</p>
             <p>Gender: ${pet.gender || "Unknown"}</p>
             <p>Price: ${pet.price || "N/A"}$</p>
-          </div>
+            </div>
+            <div class='divider'></div>
         </div>
         <div class='text-center'>
           <button class='like-btn btn rounded-xl mr-4 btn-outline border-teal-700 text-teal-700 hover:bg-teal-900'><img class='w-7' src="https://img.icons8.com/sf-regular/48/737373/facebook-like.png" /></button>
@@ -266,8 +175,6 @@ const displayCard = (pets) => {
   });
 };
 
-// ✅ Like button logic (Right-side grid pending implementation)
-// You can push liked pets to an array and display them in a thumbnail grid
 
 // ✅ Modal logic (Details)
 const loadPetDetails = async (id) => {
