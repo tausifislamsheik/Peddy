@@ -231,9 +231,10 @@ const displayCard = (pets) => {
 
   if (pets.length === 0) {
     cardContainer.innerHTML = `
-      <div class="text-center py-10 col-span-full">
-        <img class="mx-auto w-20" src="images/error.webp" alt="empty" />
-        <p class="text-xl font-bold text-gray-500 mt-4">Oops! No pets available in this category.</p>
+      <div class="text-center py-14 col-span-full bg-[#13131308] rounded-2xl">
+        <img class="mx-auto w-50" src="images/error.webp" alt="empty" />
+        <p class="text-4xl font-bold my-4">Oops! No pets available in this category.</p>
+        <p class='text-gray-500'>It is a long established fact that a reader will be distracted by the readable content of a page when looking <br> at its layout. The point of using Lorem Ipsum is that it has a.</p>
       </div>`;
     return;
   }
