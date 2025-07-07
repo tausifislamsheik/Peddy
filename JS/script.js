@@ -190,12 +190,26 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// View more button functionality 
+// View more button scroll functionality 
 
 const scrollToViewMore = () =>{
     const viewSection = document.querySelector('#category-section');
     viewSection.scrollIntoView({ behavior: 'smooth' });
-}
+};
+
+// Sort by price
+
+document.querySelector('#sort-by-price').addEventListener('click', () =>{
+    const sortedCard = [...allPets].sort((a, b) =>{
+        const getPrice = priceString =>{
+            if (!priceString) return 0;
+            const num = parseFloat(priceString);
+            return priceString ? num * 1000 : num;
+        };
+         return getPrice(b.price) - getPrice(a.price); // descending order
+    });
+    displayCard(sortedCard);
+});
 
 
 
