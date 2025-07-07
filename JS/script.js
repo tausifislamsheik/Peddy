@@ -313,12 +313,12 @@ const loadPetDetails = async (id) => {
 const displayPetDetails = (details) => {
   const detailContainer = document.querySelector('#modal-details');
   detailContainer.innerHTML = `
-    <div class="grid md:grid-cols-2 gap-6">
+    <div>
       <div class="md:order-1">
         <img class='w-full h-64 md:h-full object-cover rounded-xl' src="${details.image || 'images/placeholder.png'}" />
       </div>
       <div class="md:order-2">
-        <h2 class='text-3xl font-bold mb-4'>${details.pet_name || 'Unnamed Pet'}</h2>
+        <h2 class='text-3xl font-bold my-4'>${details.pet_name || 'Unnamed Pet'}</h2>
         <div class='grid grid-cols-2 gap-4 mb-6'>
           <div class="bg-teal-50 p-3 rounded-lg">
             <p class="text-sm text-gray-500">Breed</p>
@@ -347,7 +347,6 @@ const displayPetDetails = (details) => {
             ${likedPets.some(p => p.petId === details.petId) ? 'Liked' : 'Like'}
           </button>
           <button class="btn bg-teal-700 hover:bg-teal-800 text-white gap-2">
-            <img src="https://img.icons8.com/ios/50/FFFFFF/adoption-dog.png" class="w-5" />
             Adopt Now
           </button>
         </div>
