@@ -122,7 +122,6 @@ const categoryContainer = (categories) => {
 const loadCard = async (categoryName) => {
   const res = await fetch(`https://openapi.programming-hero.com/api/peddy/category/${categoryName}`);
   const data = await res.json();
-//   console.log(data.data)
   displayCard(data.data)
 
   // Highlight active category
@@ -180,8 +179,29 @@ const displayCard = (pets) => {
 const loadPetDetails = async (id) => {
   const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`);
   const data = await res.json();
-  console.log(data); // show in modal (implement modal here)
+  displayPetDetails(data.petData); // show in modal (implement modal here)
 };
+
+const displayPetDetails = (details) =>{
+   const detailContainer = document.querySelector('#modal-details');
+   detailContainer.innerHTML = `
+
+   <img class='w-full h-full rounded-xl' src=${details.image} />
+   <p class='my-2 text-2xl font-bold'>${details.pet_name}</p>
+   <ul class='grid grid-cols-2 text-gray-500 font-semibold'>
+     <li>Breed: ${details.breed || 'Unknown'}</li>
+     <li>Gender: ${details.gender || 'Unknown'}</li>
+     <li>Vaccinated Status: ${details.vaccinated_status || 'Unknown'}</li>
+     <li>Birth: ${details.date_of_birth || 'Unknown'}</li>
+     <li>Price: ${details.price || 'N/A'}$</li>
+   </ul>
+   <div class='divider'></div>
+   <p class='text-xl font-semibold mb-2'>Details Information</p>
+   <p class='text-gray-500 font-semibold'>${details.pet_details}</p>
+   
+   `
+   document.querySelector('#petDetails_modal').showModal()
+}
 
 // ✅ Load all pets initially
 document.addEventListener("DOMContentLoaded", () => {
@@ -210,6 +230,8 @@ document.querySelector('#sort-by-price').addEventListener('click', () =>{
     });
     displayCard(sortedCard);
 });
+
+
 
 
 
