@@ -200,11 +200,11 @@ const displayCard = (pets) => {
           <div class='divider my-2'></div>
         </div>
         <div class='text-center mt-auto pt-2'>
-          <button onclick="toggleLike(${pet.petId})" class='btn rounded-xl mr-2 btn-outline ${isLiked ? 'bg-teal-100 border-teal-800' : 'border-teal-700'} text-teal-700 hover:bg-teal-900 hover:text-white'>
+          <button onclick="toggleLike(${pet.petId})" class='btn rounded-xl mr-2 ${isLiked ? 'bg-teal-100 border-teal-800' : ''} text-teal-700 hover:bg-teal-900 hover:text-white'>
             <img class='w-5' src="${isLiked ? 'https://img.icons8.com/fluency/48/000000/facebook-like.png' : 'https://img.icons8.com/ios/50/000000/facebook-like--v1.png'}" />
           </button>
-          <button class='btn rounded-xl mr-2 btn-outline hover:bg-teal-900 hover:text-white border-teal-700 text-teal-700'>Adopt</button>
-          <button onclick="loadPetDetails(${pet.petId})" class='btn rounded-xl btn-outline hover:bg-teal-900 hover:text-white border-teal-700 text-teal-700'>Details</button>
+          <button class='btn rounded-xl mr-2 hover:bg-teal-900 hover:text-white text-teal-700'>Adopt</button>
+          <button onclick="loadPetDetails(${pet.petId})" class='btn rounded-xl hover:bg-teal-900 hover:text-white text-teal-700'>Details</button>
         </div>
       </div>
     `;
