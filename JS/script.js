@@ -204,7 +204,7 @@ const displayCard = (pets) => {
             <img class='w-5' src="${isLiked ? 'https://img.icons8.com/fluency/48/000000/facebook-like.png' : 'https://img.icons8.com/ios/50/000000/facebook-like--v1.png'}" />
           </button>
           <button onclick="handleAdopt(this)" class='btn rounded-xl mr-2 hover:bg-teal-900 hover:text-white text-teal-700'>Adopt</button>
-          <button onclick="loadPetDetails(${pet.petId})" class='btn rounded-xl hover:bg-teal-900 hover:text-white text-teal-700'>Details</button>
+          <button onclick="handleDetailsBtnClick(${pet.petId})" class='btn rounded-xl hover:bg-teal-900 hover:text-white text-teal-700'>Details</button>
         </div>
       </div>
     `;
@@ -299,6 +299,7 @@ const removeLikedPet = (petId, event) => {
 };
 
 // Load Pet Details
+
 const loadPetDetails = async (id) => {
   try {
     const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`);
@@ -309,7 +310,10 @@ const loadPetDetails = async (id) => {
   }
 };
 
+
+
 // Display Pet Details Modal
+
 const displayPetDetails = (details) => {
   const detailContainer = document.querySelector('#modal-details');
   detailContainer.innerHTML = `
@@ -415,7 +419,7 @@ const handleAdopt = (btn) => {
   };
 
 
- // Spinner section
+ // Spinner for card section
 
 function handleCategoryClick(categoryName) {
   const spinner = document.getElementById('spinner');
@@ -436,6 +440,33 @@ function handleCategoryClick(categoryName) {
     loadCard(categoryName); // Example function
   }, 1000);
 }; 
+
+
+
+// Spinner for details button
+
+
+function handleDetailsBtnClick(petId) {
+  const spinnerOverlay = document.getElementById('fullscreen-spinner');
+  spinnerOverlay.classList.remove('hidden'); // Show spinner
+
+  setTimeout(() => {
+    fetch(`https://openapi.programming-hero.com/api/peddy/pet/${petId}`)
+      .then(res => res.json())
+      .then(data => {
+        displayPetDetails(data.petData);
+      })
+      .catch(err => {
+        console.error("Error loading pet details", err);
+      })
+      .finally(() => {
+        spinnerOverlay.classList.add('hidden'); // Hide spinner after fetch
+      });
+  }, 1000); // Delay for spinner smoothness
+}
+
+
+
 
 
 
