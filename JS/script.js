@@ -138,7 +138,7 @@ const categoryContainer = (categories) => {
   categories.forEach(category => {
     const categoryBtn = document.createElement('div');
     categoryBtn.innerHTML = `
-      <button id="btn-${category.category}" onclick="loadCard('${category.category}')" 
+      <button id="btn-${category.category}" onclick='handleCategoryClick("${category.category}")' onclick="loadCard('${category.category}')" 
         class='category-button btn gap-2 px-6 lg:px-16 my-8 py-10 font-bold text-sm lg:text-lg rounded-2xl'>
         <img class='w-8 lg:w-10' src='${category.category_icon}' />
         ${category.category}
@@ -346,7 +346,7 @@ const displayPetDetails = (details) => {
             <img class='w-5' src="${likedPets.some(p => p.petId === details.petId) ? 'https://img.icons8.com/fluency/48/000000/facebook-like.png' : 'https://img.icons8.com/ios/50/000000/facebook-like--v1.png'}" />
             ${likedPets.some(p => p.petId === details.petId) ? 'Liked' : 'Like'}
           </button>
-          <button class="btn bg-teal-700 hover:bg-teal-800 text-white gap-2">
+          <button onclick='handleAdopt(this)' class="btn bg-teal-700 hover:bg-teal-800 text-white gap-2">
             Adopt Now
           </button>
         </div>
@@ -380,7 +380,7 @@ const scrollToViewMore = () => {
   viewSection.scrollIntoView({ behavior: 'smooth' });
 };
 
-// Adopt button
+// Adopt button Sweet Alert
 
 
 const handleAdopt = (btn) => {
@@ -392,6 +392,9 @@ const handleAdopt = (btn) => {
       
       showConfirmButton: false,
       allowOutsideClick: false,
+      customClass: {
+         popup: 'custom-swal'
+      },
       didOpen: () => {
         const timerEl = Swal.getHtmlContainer().querySelector('#swal-timer');
         const interval = setInterval(() => {
@@ -410,4 +413,30 @@ const handleAdopt = (btn) => {
       }
     });
   };
+
+
+ // Spinner section
+
+function handleCategoryClick(categoryName) {
+  const spinner = document.getElementById('spinner');
+  const cardSection =document.getElementById('card-container');
+  const likedPetSec = document.getElementById('liked-pet')
+  
+  spinner.classList.remove('hidden'); // Show spinner
+  cardSection.classList.add('hidden');
+  likedPetSec.classList.add('fixed');
+
+
+  setTimeout(() => {
+    spinner.classList.add('hidden'); // Hide spinner after 2s
+    cardSection.classList.remove('hidden');
+    likedPetSec.classList.remove('fixed');
+
+    // Now call your actual category function here
+    loadCard(categoryName); // Example function
+  }, 1000);
+}; 
+
+
+
 
