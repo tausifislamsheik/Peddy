@@ -203,7 +203,7 @@ const displayCard = (pets) => {
           <button onclick="toggleLike(${pet.petId})" class='btn rounded-xl mr-2 ${isLiked ? 'bg-teal-100 border-teal-800' : ''} text-teal-700 hover:bg-teal-900 hover:text-white'>
             <img class='w-5' src="${isLiked ? 'https://img.icons8.com/fluency/48/000000/facebook-like.png' : 'https://img.icons8.com/ios/50/000000/facebook-like--v1.png'}" />
           </button>
-          <button class='btn rounded-xl mr-2 hover:bg-teal-900 hover:text-white text-teal-700'>Adopt</button>
+          <button onclick="handleAdopt(this)" class='btn rounded-xl mr-2 hover:bg-teal-900 hover:text-white text-teal-700'>Adopt</button>
           <button onclick="loadPetDetails(${pet.petId})" class='btn rounded-xl hover:bg-teal-900 hover:text-white text-teal-700'>Details</button>
         </div>
       </div>
@@ -379,3 +379,35 @@ const scrollToViewMore = () => {
   const viewSection = document.querySelector('#category-section');
   viewSection.scrollIntoView({ behavior: 'smooth' });
 };
+
+// Adopt button
+
+
+const handleAdopt = (btn) => {
+    let countdown = 3;
+
+    Swal.fire({
+      title: '🎉<br> <span class="text-5xl">Congratulations</span>',
+      html: `Adoption Process is Start For your Pet<br><strong class='text-5xl' id="swal-timer">${countdown}</strong>`,
+      
+      showConfirmButton: false,
+      allowOutsideClick: false,
+      didOpen: () => {
+        const timerEl = Swal.getHtmlContainer().querySelector('#swal-timer');
+        const interval = setInterval(() => {
+          countdown--;
+          timerEl.textContent = countdown;
+
+          if (countdown === 0) {
+            clearInterval(interval);
+            Swal.close();
+            btn.textContent = 'Adopted';
+            btn.disabled = true;
+            btn.classList.add('bg-gray-500','text-gray-400', 'cursor-not-allowed');
+            btn.classList.remove('text-teal-700')
+          }
+        }, 1000);
+      }
+    });
+  };
+
